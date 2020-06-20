@@ -12,7 +12,7 @@ class Inmovilla
         if (is_string($data)) {
             $data = json_decode($data);
         }
-        $this->data = $data;
+        $this->data = collect($data);
     }
 
     public function get()
