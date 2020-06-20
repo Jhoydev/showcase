@@ -13,6 +13,7 @@ class Inmovilla
             $data = json_decode($data);
         }
         $this->data = collect($data);
+        dd($this->data);
     }
 
     public function get()
