@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Clients\Inmovilla;
+use App\Escaparate;
 use Illuminate\Http\Request;
 
 class EscaparateController extends Controller
@@ -13,7 +15,11 @@ class EscaparateController extends Controller
      */
     public function index()
     {
-        return false;
+
+
+        $data = new Inmovilla('1');
+        $data = $data->get();
+        return view('escaparates.index',compact('data'));
     }
 
     /**
@@ -34,7 +40,9 @@ class EscaparateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $escaparate = Escaparate::make(request()->headers->get('referer'));
+        $data = $escaparate->get();
+        return view('escaparates.index',compact('data'));
     }
 
     /**

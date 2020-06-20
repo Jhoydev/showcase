@@ -17,8 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('escaparates',  function(){
-  return view('escaparates.index');
-});
+Route::resource('escaparates',  'EscaparateController');
 
 
