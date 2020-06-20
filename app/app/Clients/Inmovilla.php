@@ -8,7 +8,11 @@ class Inmovilla
 
     public function __construct() {
         $data = request()->all();
-        $this->data = json_decode($data);
+
+        if (is_string($data)) {
+            $data = json_decode($data);
+        }
+        $this->data = $data;
     }
 
     public function get()
