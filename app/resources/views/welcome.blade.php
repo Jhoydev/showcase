@@ -4,13 +4,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Jhoseph.Dev</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Styles -->
         <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -45,7 +51,9 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 48px;
+                display: flex;
+                justify-content: center;
             }
 
             .links > a {
@@ -61,6 +69,47 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            h1 {
+                width: 11ch;
+                animation: type 2s steps(11), blink 0.5s step-end infinite alternate;
+                white-space: nowrap;
+                overflow: hidden;
+                border-right: 3px solid;
+                font-family: 'Roboto Mono', monospace;
+            }
+
+            @keyframes type {
+                from {
+                    width: 0;
+                }
+            }
+            @keyframes blink {
+                50% {
+                    border-color: transparent;
+                }
+            }
+            .fadeIn {
+                animation: fadeIn 1s;
+                animation-fill-mode: both;
+            }
+
+            .wait-1s {
+                animation-delay: 1s;
+            }
+
+            .wait-2s {
+                animation-delay: 2s;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
         </style>
     </head>
     <body>
@@ -81,18 +130,24 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <h1>Jhoseph.Dev</h1>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="links fadeIn wait-2s">
+                    <a href="{{ url('escaparates') }}">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                        Escaparates
+                    </a>
+                    <a href="https://laracasts.com">
+                        <i class="fa fa-code" aria-hidden="true"></i>
+                        Frontend
+                    </a>
+                    <a href="https://laravel-news.com">
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                        Backend
+                    </a>
+                    <a target="_blank" href="https://github.com/Jhoydev">
+                        <i class="fa fa-github" aria-hidden="true"></i>
+                        GitHub</a>
                 </div>
             </div>
         </div>
