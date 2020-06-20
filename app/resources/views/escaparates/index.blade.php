@@ -1,3 +1,3 @@
 <pre>
-  <?php print_r($_POST) ?>
+  <?php echo json_encode($_POST)  ?>
 </pre>
