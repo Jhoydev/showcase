@@ -15,9 +15,7 @@ class EscaparateController extends Controller
      */
     public function index()
     {
-        $data = new Inmovilla('1');
-        $data = $data->get();
-        return view('escaparates.index',compact('data'));
+        return view('escaparates.index');
     }
 
     /**
@@ -40,7 +38,7 @@ class EscaparateController extends Controller
     {
         $escaparate = Escaparate::make($request->headers->get('referer'));
         $data = $escaparate->get();
-        return view('escaparates.index',compact('data'));
+        return view('escaparates.previous',compact('data'));
     }
 
     /**
