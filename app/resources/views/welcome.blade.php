@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Jhoseph.Dev</title>
+        <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="/favicon.svg">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
