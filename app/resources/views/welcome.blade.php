@@ -51,7 +51,7 @@
             }
 
             .title {
-                font-size: 48px;
+                font-size: 4vw;
                 display: flex;
                 justify-content: center;
             }
@@ -70,13 +70,21 @@
                 margin-bottom: 30px;
             }
             h1 {
-                width: 11ch;
+                width: 12ch;
                 animation: type 2s steps(11), blink 0.5s step-end infinite alternate;
                 white-space: nowrap;
                 overflow: hidden;
                 border-right: 3px solid;
                 font-family: 'Roboto Mono', monospace;
             }
+
+            .content-avatar img{
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
 
             @keyframes type {
                 from {
@@ -99,6 +107,10 @@
 
             .wait-2s {
                 animation-delay: 2s;
+            }
+
+            .wait-2-5s {
+                animation-delay: 2.5s;
             }
 
             @keyframes fadeIn {
@@ -129,6 +141,9 @@
             @endif
 
             <div class="content">
+                <div class="content-avatar fadeIn wait-2-5s">
+                    <img src="https://avatars0.githubusercontent.com/u/28726329?s=460&u=58e5a667ed1d88d82bed01dfeb5223690f1c558c&v=4" alt="">
+                </div>
                 <div class="title m-b-md">
                     <h1>Jhoseph.Dev</h1>
                 </div>
