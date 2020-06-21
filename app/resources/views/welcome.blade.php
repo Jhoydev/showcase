@@ -134,20 +134,6 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
             <div class="content">
                 <div class="content-avatar fadeIn wait-2-5s">
                     <img src="https://avatars0.githubusercontent.com/u/28726329?s=460&u=58e5a667ed1d88d82bed01dfeb5223690f1c558c&v=4" alt="">
@@ -170,7 +156,12 @@
                     </a>
                     <a target="_blank" href="https://github.com/Jhoydev">
                         <i class="fa fa-github" aria-hidden="true"></i>
-                        GitHub</a>
+                        GitHub
+                    </a>
+                    <a target="_blank" href="https://www.linkedin.com/in/jhoseph-arango-346a58ba/">
+                        <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        Linkedin
+                    </a>
                 </div>
             </div>
         </div>
