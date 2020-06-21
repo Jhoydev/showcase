@@ -64,6 +64,7 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                margin-bottom: 10px;
             }
 
             .m-b-md {
@@ -121,7 +122,12 @@
                     opacity: 1;
                 }
             }
-
+            @media (max-width: 650px) {
+                .links {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
         </style>
     </head>
     <body>
