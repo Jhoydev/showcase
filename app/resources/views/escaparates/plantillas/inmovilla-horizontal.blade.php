@@ -34,7 +34,7 @@
             grid-template-columns: 2fr 1fr;
             grid-template-areas:    "cnt_logo cnt_main_label"
             "ctn_title cnt_main_label";
-            background-image: url('images/hero.jpg');
+            background-image: url('{{ url('images/hero.jpg') }}');
             background-repeat: no-repeat;
             padding-left: 40px;
             background-size: cover;
@@ -190,9 +190,6 @@
             grid-area: third_foto;
         }
 
-
-
-
         #ctn_caract{
             grid-area: ctn_caract;
             padding-left: 40px;
@@ -298,24 +295,31 @@
 <div class="contenedor-escaparate">
     <header>
         <div id="cnt_logo">
-            <img src="images/logotipopanel.png" alt="">
+            <img src="/images/logotipopanel.png" alt="">
         </div>
         <div id="ctn_title">
+
             {{ $data->property_type }} EN VENTA
         </div>
         <div id="cnt_main_label">
             <div class="cnt_label">
                 <div class="first_label">{{ $data->price }} €</div>
                 <div class="second_label">
-                    <div class="cnt_icon">
-                        2 <img src="images/icons/bed.svg" alt="">
-                    </div>
-                    <div class="cnt_icon">
-                        1 <img src="images/icons/bathroom.svg" alt="">
-                    </div>
-                    <div class="cnt_icon">
-                        <span>1</span><img src="images/icons/parking.svg" alt="">
-                    </div>
+                    @if ($data->bedroom)
+                        <div class="cnt_icon">
+                            {{ $data->bedroom }} <img src="/images/icons/bed.svg" alt="">
+                        </div>
+                    @endif
+                    @if ($data->bathroom)
+                        <div class="cnt_icon">
+                            {{ $data->bathroom }} <img src="/images/icons/bathroom.svg" alt="">
+                        </div>
+                    @endif
+                    @if ($data->parking)
+                        <div class="cnt_icon">
+                            {{ $data->parking }} <img src="/images/icons/parking.svg" alt="">
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -323,7 +327,7 @@
     <main>
         <div id="ctn_main_data">
             <div id="ctn_data">
-                <div class="main_data">Antonio López, Usera, Madrid</div>
+                <div class="main_data">{{ $data->address }}, {{ $data->zone }}, {{ $data->city }}</div>
                 <div class="data_ref">REF: {{ $data->ref }}</div>
             </div>
         </div>
@@ -363,7 +367,7 @@
     </main>
 
     <footer>
-        <div class="telefono"><img src="images/phone.svg" alt="">12313</div>
+        <div class="telefono"><img src="/images/phone.svg" alt="">{{ $data->agent_phone }}</div>
         <div class="direccion">Calle Gabriel Usera nº 25 local Madrid (Madrid) 28026</div>
         <div class="web">www.eurollave.es</div>
     </footer>

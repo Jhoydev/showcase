@@ -36,9 +36,7 @@ class EscaparateController extends Controller
      */
     public function store(Request $request)
     {
-        $escaparate = Escaparate::make($request->headers->get('referer'));
-        $data = $escaparate->get();
-        return view('escaparates.previous',compact('data'));
+
     }
 
     /**
@@ -84,5 +82,13 @@ class EscaparateController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function previous(Request $request, $id)
+    {
+        $escaparate = Escaparate::Where('id',$id)->first();
+        $view = $escaparate->view();
+        $data  = Escaparate::make($request->headers->get('referer'));
+        return view($view,compact('data'));
     }
 }
