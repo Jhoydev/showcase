@@ -15,7 +15,7 @@ class Escaparate extends Model
      * @param $referer
      * @return mixed
      */
-    public static function make($referer)
+    public function make($referer)
     {
         if ($referer) {
             return ClientFactory::make($referer);

@@ -206,6 +206,7 @@
         .title_caract{
             color: #008cd1;
             font-weight: 400;
+            font-size: 24px;
         }
 
         #ctn_cert{
@@ -299,7 +300,7 @@
         </div>
         <div id="ctn_title">
 
-            {{ $data->property_type }} EN VENTA
+            {{ $data->property_type }} EN {{ $data->operation }}
         </div>
         <div id="cnt_main_label">
             <div class="cnt_label">
@@ -345,21 +346,20 @@
         </div>
         <div id="ctn_caract">
             <p class="title_caract">Caracteristicas</p>
-            <p>Mt Const: 66m<sup>2</sup></p>
-            <p>Superficie Útil: 57m<sup>2</sup></p>
-            <p>PLanta: 3º</p>
-            <p>Conservación: Semi nuevo</p>
-            <p>Comunidad: 73 €/MEN</p>
+            {!! $data->m_const ? "<p>Mt Const: {$data->m_const}m<sup>2</sup></p>" : '' !!}
+            {!! $data->m_area ? "<p>Superficie Útil: {$data->m_area}m<sup>2</sup></p>" : '' !!}
+            {!! $data->floor ? "<p>Planta: {$data->floor}ª</p>" : '' !!}
+            {!! $data->category_built ? "<p>Conservación: {$data->category_built}</p>" : '' !!}
+            {!! $data->cost_community ? "<p>Comunidad: {$data->cost_community}€/MEN</p>" : '' !!}
         </div>
         <div id="ctn_calid">
             <p class="title_caract">Calidades:</p>
-            <p>Ascensor</p>
-            <p>Electrodomésticos</p>
-            <p>Calefacción</p>
-            <p>Armarios Empotrados</p>
-            <p>Puerta Blindada</p>
-            <p>Linea Telefónica</p>
-
+            {!! $data->lift ? "<p>Ascensor</p>" : '' !!}
+            {!! $data->heating ? "<p>Calefacción</p>" : '' !!}
+            {!! $data->appliances ? "<p>Electrodomésticos</p>" : '' !!}
+            {!! $data->wardrove ? "<p>Armarios Empotrados</p>" : '' !!}
+            {!! $data->reinforced_door ? "<p>Puerta Blindada</p>" : '' !!}
+            {!! $data->phone_line ? "<p>Linea Telefónica</p>" : '' !!}
         </div>
         <div id="ctn_cert">
             <img src="https://www.certificadosbaratos.es/img/icons/sin-riesgo.png" alt="">

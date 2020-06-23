@@ -4,9 +4,10 @@ namespace App\Clients;
 class Inmovilla extends Skeleton
 {
 
-    public $data;
+    protected $data;
 
     public function __construct() {
+
 
         $data = request()->all();
         $data = $this->fakeData();
@@ -33,17 +34,23 @@ class Inmovilla extends Skeleton
         $this->m_plot = $data->m_parcela;
         $this->m_area = $data->m_uties;
         $this->m_const = $data->m_cons;
+        $this->category_built = $data->nbconservacion;
+
         $this->id_agency = $data->numagencia;
         $this->parking = $data->plaza_gara;
         $this->address = $data->calle;
+        $this->lift = $data->ascensor;
+        $this->heating = $data->calefaccion;
+        $this->appliances = $data->electro;
+        $this->wardrove = $data->arma_empo;
+        $this->reinforced_door = $data->puerta_blin;
+        $this->phone_line = $data->linea_tlf;
+        $this->cost_community = $data->gastos_com;
+        $this->operation = $data->acciones;
+
         $this->agent_phone = $data->telefono_agente;
         $this->fotos = $this->fotos();
-
-    }
-
-    public function get()
-    {
-        return $this->data;
+        $this->normalizer();
     }
 
     private function fotos(){
@@ -76,7 +83,7 @@ class Inmovilla extends Skeleton
           "ciudad2": "Reus - Mestral",
           "nbconservacion": "Ninguno",
           "comunidadincluida": "0",
-          "gastos_com": "0",
+          "gastos_com": "50",
           "tgascom": "",
           "nborientacion": "",
           "banyos": "1",
@@ -103,7 +110,7 @@ class Inmovilla extends Skeleton
           "linea_tlf": "0",
           "solarium": "0",
           "terraza": "1",
-          "ascensor": "0",
+          "ascensor": "1",
           "arma_empo": "0",
           "montacargas": "0",
           "trastero": "0",

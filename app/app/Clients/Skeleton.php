@@ -24,5 +24,21 @@ class Skeleton
     public $fotos;
     public $parking;
     public $agent_phone;
+    public $lift;
+    public $heating;
+    public $appliances;
+    public $wardrove;
+    public $reinforced_door;
+    public $phone_line;
+    public $cost_community;
+    public $category_built;
+    public $operation;
 
+
+    protected function normalizer()
+    {
+        $this->address = $this->address ?: 'Sin Calle';
+        $this->price = $this->price ?: 'A consultar';
+        $this->operation = ($this->operation == 'Vender') ? 'Venta' : $this->operation;
+    }
 }
