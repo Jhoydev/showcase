@@ -10,7 +10,7 @@ class Inmovilla extends Skeleton
 
 
         $data = request()->all();
-        $data = $this->fakeData();
+        //$data = $this->fakeData();
         if (is_string($data)) {
             $data = json_decode($data);
         }
