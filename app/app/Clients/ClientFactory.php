@@ -1,6 +1,7 @@
 <?php
 namespace App\Clients;
 
+use App\RequestClient;
 use Illuminate\Support\Str;
 
 class ClientFactory
@@ -14,6 +15,8 @@ class ClientFactory
 
         if (Str::contains($referer,$inmovilla)){
             $class = "App\\Clients\\Inmovilla";
+            $request_client = RequestClient::where('id', request()->request_client_id)->first();
+            return new $class($request_client->request);
         }
 
         if (Str::contains($referer,$test)){

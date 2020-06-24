@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Escaparate;
-use App\Clients\Inmovilla;
 use App\RequestClient;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class EscaparateController extends Controller
+class RequestClientController extends Controller
 {
-    public function __construct()
-    {
-
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +14,7 @@ class EscaparateController extends Controller
      */
     public function index()
     {
-        return view('escaparates.index');
+        //
     }
 
     /**
@@ -43,26 +35,27 @@ class EscaparateController extends Controller
      */
     public function store(Request $request)
     {
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\RequestClient  $requestClient
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(RequestClient $requestClient)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\RequestClient  $requestClient
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RequestClient $requestClient)
     {
         //
     }
@@ -71,10 +64,10 @@ class EscaparateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\RequestClient  $requestClient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RequestClient $requestClient)
     {
         //
     }
@@ -82,27 +75,11 @@ class EscaparateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\RequestClient  $requestClient
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RequestClient $requestClient)
     {
         //
-    }
-
-
-
-    public function previous(Request $request, $id)
-    {
-
-        $escaparate = Escaparate::Where('id', $id)->first();
-        $view = $escaparate->view();
-        $referer = $request->headers->get('referer');
-        if ($request->request_client_id) {
-            $request_client = RequestClient::where('id',$request->request_client_id)->first();
-            $referer = 'inmovilla';
-        }
-        $data  = $escaparate->make($referer);
-        return view($view, compact('data'));
     }
 }

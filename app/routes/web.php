@@ -6,9 +6,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
 Route::resource('escaparates',  'EscaparateController');
 Route::get('escaparates',  'EscaparateController@index');
-Route::post('escaparates/{escaparate}',  'EscaparateController@previous');
+Route::post('escaparates/{escaparate}','EscaparateController@previous');
 
-Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

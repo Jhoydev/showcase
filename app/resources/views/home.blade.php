@@ -14,7 +14,17 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <ul>
+                        @foreach($request_client as $req)
+                    <li>
+                        {{ $req->title }} - {{ $req->client->name }}
+                        <form method="POST" action="{{ url('escaparates/1') }}">
+                        <input type="hidden" name="request_client_id" value="{{ $req->id }}">
+                            <button type="submit">Genera</button>
+                        </form>
+                    </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

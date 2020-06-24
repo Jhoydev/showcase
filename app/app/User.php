@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function createRequestClient(Client $client, $request)
+    {
+        RequestClient::create([
+            'request' => json_encode($request->all()),
+            'title' => $request->ref,
+            'client_id' => $client->id,
+            'user_id' => $this->id
+
+        ]);
+    }
+
+    public function request_client()
+    {
+        return $this->hasMany('App\RequestClient');
+    }
 }
