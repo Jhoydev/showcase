@@ -27,6 +27,6 @@ class HomeController extends Controller
     public function index()
     {
         $clients  = Client::all();
-        return view('home',compact('clients','request_client'));
+        return view('home',compact('clients'));
     }
 }
