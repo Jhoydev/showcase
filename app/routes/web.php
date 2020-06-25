@@ -7,8 +7,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 Route::resource('escaparates',  'EscaparateController');
 Route::get('escaparates',  'EscaparateController@index');
 Route::post('escaparates/{escaparate}','EscaparateController@previous');
+Route::get('/escaparates/create/{client}',  'EscaparateController@create');
+
+Route::get('/profile','UserController@profile')->name('profile')->middleware('auth');
+
 
 Route::get('/home', 'HomeController@index')->name('home');

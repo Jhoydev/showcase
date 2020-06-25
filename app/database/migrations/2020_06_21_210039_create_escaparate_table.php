@@ -16,8 +16,10 @@ class CreateEscaparateTable extends Migration
         Schema::create('escaparates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('orientation',['portrait', 'landscape']);
             $table->string('slug')->unique();
-            $table->text('description');
+            $table->string('thumbnail')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

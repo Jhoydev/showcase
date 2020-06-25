@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\RequestClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $request_client = RequestClient::with('client')->select('id','title','client_id')->where('user_id',Auth::user()->id)->get();
-        return view('home',compact('request_client'));
+        $clients  = Client::all();
+        return view('home',compact('clients','request_client'));
     }
 }

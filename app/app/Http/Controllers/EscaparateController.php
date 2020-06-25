@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\Escaparate;
 use App\Clients\Inmovilla;
 use App\RequestClient;
@@ -30,9 +31,11 @@ class EscaparateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Client $client)
     {
-        //
+        $escaparates = Escaparate::all();
+        $request_client = $client->request_client()->where('user_id',Auth::user()->id)->get();
+        return view('escaparates.create',compact('client','request_client','escaparates'));
     }
 
     /**
