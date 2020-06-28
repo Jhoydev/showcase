@@ -49,6 +49,7 @@ class Skeleton
         if (Auth::user()) {
             $this->web = $this->web ?: Auth::user()->web;
             $this->logo = $this->logo ?: Auth::user()->logo;
+            $this->agent_phone = $this->agent_phone ?: Auth::user()->phone;
             $this->address_agency = $this->address_agency ?: Auth::user()->address;
         }
     }
