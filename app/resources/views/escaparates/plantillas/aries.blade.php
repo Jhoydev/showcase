@@ -296,7 +296,8 @@
 <div class="contenedor-escaparate">
     <header>
         <div id="cnt_logo">
-            <img src="/images/logotipopanel.png" alt="">
+        <img src="{{ url($data
+        ->logo) }}" alt="">
         </div>
         <div id="ctn_title">
 
@@ -368,8 +369,8 @@
 
     <footer>
         <div class="telefono"><img src="/images/phone.svg" alt="">{{ $data->agent_phone }}</div>
-        <div class="direccion">Calle Gabriel Usera nº 25 local Madrid (Madrid) 28026</div>
-        <div class="web">www.eurollave.es</div>
+        <div class="direccion">{{$data->address_agency}}</div>
+        <div class="web">{{ $data->web }}</div>
     </footer>
 
 </div>

@@ -95,10 +95,10 @@ class EscaparateController extends Controller
 
 
 
-    public function previous(Request $request, $id)
+    public function previous(Request $request)
     {
 
-        $escaparate = Escaparate::Where('id', $id)->first();
+        $escaparate = Escaparate::Where('id', $request->escaparate_id)->first();
         $view = $escaparate->view();
         $referer = $request->headers->get('referer');
         if ($request->request_client_id) {

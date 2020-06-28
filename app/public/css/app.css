@@ -10932,3 +10932,12 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+.create_escaparate .card.selected {
+  background-color: #3490dc;
+  color: white;
+}
+
+.create_escaparate .img-escaparate.selected {
+  border: 3px solid #3490dc;
+}
+

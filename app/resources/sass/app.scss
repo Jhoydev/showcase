@@ -10,3 +10,17 @@
 .pointer{
     cursor: pointer;
 }
+
+.create_escaparate{
+    .card {
+        &.selected {
+            background-color: $primary;
+            color: white;
+        }
+    }
+    .img-escaparate {
+        &.selected {
+            border: 3px solid $primary;
+        }
+    }
+}

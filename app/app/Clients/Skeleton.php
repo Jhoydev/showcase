@@ -1,6 +1,8 @@
 <?php
 namespace App\Clients;
 
+use Illuminate\Support\Facades\Auth;
+
 class Skeleton
 {
     public $property_id;
@@ -33,6 +35,10 @@ class Skeleton
     public $cost_community;
     public $category_built;
     public $operation;
+    public $web;
+    public $address_agency;
+    public $logo;
+
 
 
     protected function normalizer()
@@ -40,5 +46,10 @@ class Skeleton
         $this->address = $this->address ?: 'Sin Calle';
         $this->price = $this->price ?: 'A consultar';
         $this->operation = ($this->operation == 'Vender') ? 'Venta' : $this->operation;
+        if (Auth::user()) {
+            $this->web = $this->web ?: Auth::user()->web;
+            $this->logo = $this->logo ?: Auth::user()->logo;
+            $this->address_agency = $this->address_agency ?: Auth::user()->address;
+        }
     }
 }
