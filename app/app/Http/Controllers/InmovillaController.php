@@ -21,7 +21,7 @@ class InmovillaController extends Controller
         $user = User::where('api_key',$api_key)->first();
         $inmovilla = Client::where('name','inmovilla')->first();
 
-        dd($user->id,$host);
+        dd($host);
         if (Str::contains($host, explode(';', $inmovilla->domain)) && $user->id){
 
             if ($user->request_client->count() >= 10) {
