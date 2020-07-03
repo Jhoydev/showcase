@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container create_escaparate">
+<div class="container-fluid create_escaparate">
     <div class="row mb-4">
         <div class="col-12">
             <h3>Elige un escaparate pendiente</h3>
@@ -15,12 +15,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <h3>Elige una plantilla</h3>
         </div>
         @foreach ($escaparates as $escaparate)
         <div class="col-md-3">
-        <img class="img-thumbnail mb-5 pointer img-escaparate" src="{{ $escaparate->thumbnail }}" alt="{{ $escaparate->name }}" data-escaparate_id="{{ $escaparate->id}}">
+            <h5 class="text-capitalize">{{$escaparate->name }}</h5>
+            <img class="img-thumbnail mb-5 pointer img-escaparate" src="{{ $escaparate->thumbnail }}" alt="{{ $escaparate->name }}" data-escaparate_id="{{ $escaparate->id}}">
         </div>
         @endforeach
     </div>
@@ -57,7 +58,7 @@
                 <form action="{{ route('showcase.previous') }}" method="POST">
                     <input type="hidden" id="request_client_id"  name="request_client_id">
                     <input type="hidden" id="escaparate_id"  name="escaparate_id">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-light border" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Confirmar</button>
                 </form>
             </div>

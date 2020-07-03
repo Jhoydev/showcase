@@ -1,5 +1,6 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap');
 
 // Variables
 @import 'variables';
@@ -12,6 +13,11 @@
 }
 
 .create_escaparate{
+    background-image: url('/images/icons/creative.svg');
+    height: 85vh;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: 600px 300px;
     .card {
         &.selected {
             background-color: $primary;
@@ -23,4 +29,10 @@
             border: 3px solid $primary;
         }
     }
+}
+
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Oswald',sans-serif;
+    font-weight: 600;
 }

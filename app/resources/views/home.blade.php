@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @include('components.alert')
     <div class="row">
         @foreach ($clients as $client)
         @php($request_client_count = Auth::user()->request_client()->where('client_id',$client->id)->get()->count())

@@ -20,11 +20,14 @@
         .contenedor-escaparate{
             width: 29.7cm;
             height:  21cm;
+            max-width: 29.7cm;
+            min-height: 21cm;
             display: grid;
-            grid-template-rows: .5fr minmax(0, 4fr) .5fr;
+            grid-template-rows: minmax(0, 1.18fr) minmax(0, 4fr) minmax(0, .5fr);
             grid-template-areas:    "head"
             "main"
             "foot";
+            overflow: hidden;
 
         }
         header{
@@ -108,7 +111,7 @@
             font-size: 64px;
             font-family: 'Roboto', sans-serif;
             font-weight: 900;
-            line-height: 45px;
+            line-height: 43px;
             text-transform: uppercase;
         }
 
@@ -126,11 +129,11 @@
         main{
             display: grid;
             grid-area: main;
-            grid-template-rows: .5fr 1fr 1fr;
-            grid-template-columns: .4fr .4fr 1fr;
+            grid-template-rows: minmax(0,.5fr) 1fr 1fr;
+            grid-template-columns: minmax(0,.4fr) .4fr 1fr;
             grid-template-areas:    "ctn_main_data ctn_main_data ctn_fotos"
-            "ctn_caract . ctn_fotos"
-            "ctn_calid ctn_cert ctn_fotos";
+                                    "ctn_caract . ctn_fotos"
+                                    "ctn_calid ctn_cert ctn_fotos";
 
         }
 
@@ -144,11 +147,13 @@
             padding: 20px 20px 5px 20px;
             background-color: whitesmoke;
             clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+
         }
 
         .main_data{
             color: navy;
-            font-size: 28px;;
+            font-size: 24px;
+            max-width: 90%;
         }
         .data_ref{
             font-size: 20px;
@@ -181,13 +186,22 @@
 
         .main_foto img{
             height: 100%;
+            max-height: 291px
         }
 
         .second_foto{
             grid-area: second_foto;
         }
+        .second_foto img{
+            height: 218px;
+            max-height: 218px;
+        }
         .third_foto{
             grid-area: third_foto;
+        }
+        .third_foto{
+            height: 218px;
+            max-height: 218px;
         }
 
         #ctn_caract{
@@ -226,8 +240,6 @@
             display: grid;
             grid-template-columns: 1fr 3fr 1fr;
             padding: 0 20px;
-            font-family: 'Jomolhari', serif;
-
         }
 
         .telefono{
@@ -240,6 +252,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 900;
+            font-family: 'Jomolhari', serif;
         }
 
         .telefono:after{
@@ -296,8 +309,7 @@
 <div class="contenedor-escaparate">
     <header>
         <div id="cnt_logo">
-        <img src="{{ url($data
-        ->logo) }}" alt="">
+        <img src="{{ $data->logo }}" alt="">
         </div>
         <div id="ctn_title">
 
@@ -330,7 +342,9 @@
         <div id="ctn_main_data">
             <div id="ctn_data">
                 <div class="main_data">{{ $data->address }}, {{ $data->zone }}, {{ $data->city }}</div>
-                <div class="data_ref">REF: {{ $data->ref }}</div>
+                <div class="data_ref">
+                    REF: {{ $data->ref }}
+                </div>
             </div>
         </div>
         <div id="ctn_fotos">
@@ -363,7 +377,6 @@
             {!! $data->phone_line ? "<p>Linea Telefónica</p>" : '' !!}
         </div>
         <div id="ctn_cert">
-            <img src="https://www.certificadosbaratos.es/img/icons/sin-riesgo.png" alt="">
         </div>
     </main>
 
