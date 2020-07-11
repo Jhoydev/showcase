@@ -7,7 +7,7 @@ class Skeleton
 {
     public $property_id;
     public $ref;
-    public $type_moth_rent;
+    public $type_month_rent;
     public $price;
     public $status;
     public $price_rent;
@@ -43,8 +43,9 @@ class Skeleton
 
     protected function normalizer()
     {
+        $this->city = $this->city ?: '';
         $this->address = $this->address ?: 'Sin Calle';
-        $this->price = $this->price ?: 'A consultar';
+        $this->price = number_format($this->price,0,',','.') ?: 'A consultar';
         $this->operation = ($this->operation == 'Vender') ? 'Venta' : $this->operation;
         if (Auth::user()) {
             $this->web = $this->web ?: Auth::user()->web;
@@ -52,5 +53,16 @@ class Skeleton
             $this->agent_phone = $this->agent_phone ?: Auth::user()->phone;
             $this->address_agency = $this->address_agency ?: Auth::user()->address;
         }
+    }
+
+    protected function setDefaultValues($data)
+    {
+        foreach ($this->fillable as $field) {
+            if (!isset($data->$field)) {
+                $data->{$field} = '';
+                $data->$field = $data->$field ?: '';
+            }
+        }
+        return $data;
     }
 }

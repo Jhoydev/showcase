@@ -4,26 +4,34 @@
 <div class="container">
     @include('components.alert')
     <div class="row">
-        @foreach ($clients as $client)
-        @php($request_client_count = Auth::user()->request_client()->where('client_id',$client->id)->get()->count())
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex align-items-center p-2" style="height: 150px">
-                        <img src="{{ $client->logo }}" class="card-img-top" alt="inmovilla">
+                    <div class="d-flex align-items-center p-2">
+                        <img src="{{ url('/images/icons/creative.svg') }}" class="card-img-top" alt="inmovilla" style="height: 150px">
                     </div>
-                    <div>
-                        <a href="{{ url("/escaparates/create/".$client->id) }}" class="btn btn-primary btn-block">
-                            Escaparates
-                            @if($request_client_count)
-                            <span class="pull-right badge badge-danger">{{ $request_client_count }}</span>
-                            @endif
-                        </a>
-                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url('/escaparates/create') }}" class="btn btn-primary btn-block">
+                        Generar Escaparate
+                    </a>
                 </div>
             </div>
         </div>
-        @endforeach
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center p-2" style="">
+                        <img src="{{ url('/images/icons/property.svg') }}" class="card-img-top" alt="inmovilla" style="height: 150px">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url('properties') }}" class="btn btn-primary btn-block">
+                        Agregar Propiedades
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

@@ -10927,6 +10927,14 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+.create_escaparate {
+  background-image: url("/images/icons/creative.svg");
+  height: 85vh;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: 600px 300px;
+}
+
 .create_escaparate .card.selected {
   background-color: #3490dc;
   color: white;
@@ -10935,7 +10943,6 @@ a.text-dark:focus {
 .create_escaparate .img-escaparate.selected {
   border: 3px solid #3490dc;
 }
-
 
 h1,
 h2,

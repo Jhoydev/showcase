@@ -8,6 +8,6 @@ class Client extends Model
 {
     public function request_client()
     {
-        return $this->hasMany('App\RequestClient');
+        return $this->hasMany('App\Property');
     }
 }

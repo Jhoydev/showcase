@@ -352,11 +352,10 @@
                 <img src="{{ $data->fotos[0] }}" alt="">
             </div>
             <div class="second_foto">
-                <img src="{{ $data->fotos[1] }}" alt="">
-
+                <img src="{{ (isset($data->fotos[1])) ? $data->fotos[1]: $data->fotos[0] }}" alt="">
             </div>
             <div class="third_foto">
-                <img src="{{ $data->fotos[2] }}" alt="">
+                <img src="{{ (isset($data->fotos[2])) ? $data->fotos[2]: $data->fotos[0] }}" alt="">
             </div>
         </div>
         <div id="ctn_caract">

@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public function createRequestClient(Client $client, $request)
     {
-        RequestClient::create([
+        Property::create([
             'request' => json_encode($request->all()),
             'title' => $request->ref,
             'client_id' => $client->id,
@@ -52,6 +52,6 @@ class User extends Authenticatable
 
     public function request_client()
     {
-        return $this->hasMany('App\RequestClient');
+        return $this->hasMany('App\Property');
     }
 }

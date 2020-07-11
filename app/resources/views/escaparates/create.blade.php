@@ -2,10 +2,7 @@
 
 @section('content')
 <div class="container-fluid create_escaparate">
-    <div class="row mb-4">
-        <div class="col-12">
-            <h3>Elige un escaparate pendiente</h3>
-        </div>
+    <div class="row mb-4 d-flex justify-content-center">
         <div class="col-12 d-flex">
             @foreach ($request_client as $item)
                 <div class="card mr-3 request_client_card text-second pointer" data-request_client_id="{{ $item->id}}">
@@ -21,7 +18,8 @@
         @foreach ($escaparates as $escaparate)
         <div class="col-md-3">
             <h5 class="text-capitalize">{{$escaparate->name }}</h5>
-            <img class="img-thumbnail mb-5 pointer img-escaparate" src="{{ $escaparate->thumbnail }}" alt="{{ $escaparate->name }}" data-escaparate_id="{{ $escaparate->id}}">
+            <img class="img-thumbnail mb-5 pointer img-escaparate" src="{{ $escaparate->thumbnail }}"
+                alt="{{ $escaparate->name }}" data-escaparate_id="{{ $escaparate->id}}">
         </div>
         @endforeach
     </div>
@@ -56,8 +54,8 @@
             </div>
             <div class="modal-footer">
                 <form action="{{ route('showcase.previous') }}" method="POST">
-                    <input type="hidden" id="request_client_id"  name="request_client_id">
-                    <input type="hidden" id="escaparate_id"  name="escaparate_id">
+                    <input type="hidden" id="request_client_id" name="request_client_id">
+                    <input type="hidden" id="escaparate_id" name="escaparate_id">
                     <button type="button" class="btn btn-light border" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Confirmar</button>
                 </form>
@@ -80,12 +78,43 @@
         $('#confirm-showcase #request_client_id').val($(ev.currentTarget).data('request_client_id'));
         showConfirmShowcase();
     });
+
     $('.img-escaparate').click((ev) => {
         $('.img-escaparate').removeClass('selected');
         $(ev.currentTarget).addClass('selected');
         thumbnail_selected = $(ev.currentTarget).first('img').prop('src');
         $('#confirm-showcase #escaparate_id').val($(ev.currentTarget).data('escaparate_id'));
         showConfirmShowcase();
+    });
+
+    $('#form_upload_file').submit((e) => {
+        e.preventDefault();
+
+        var fd = new FormData(e.target);
+        var files = $('#file')[0].files[0];
+        var url = e.target.action;
+
+        fd.append('_token',$('meta[name="csrf-token"]').attr('content'));
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                let html = '';
+                response.property.forEach(element => {
+                    html += `<div class="col-md-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        Referencia: ${element.ref}
+                                    </div>
+                                </div>
+                            </div>`
+                });
+                $('#content_response_upload>.row').html(html);
+            },
+        });
     });
 
     function showConfirmShowcase()
@@ -96,6 +125,52 @@
             $('#confirm-showcase').modal('show');
         }
     }
+
+
+    function fileValidation(input)
+    {
+        filevalidationSize(input);
+        fileValidateExtension(input);
+    }
+
+
+
+    function filevalidationSize(input)
+    {
+        const fi = input;
+
+
+        // Check if any file is selected.
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+                const fsize=fi.files.item(i).size;
+                const file=Math.round((fsize / 1024));
+                // The size of the file.
+                if (file>= 100){
+                    alert("File too Big, please select a file less than 100KB");
+                    return false;
+                } else if (file < 2) {
+                    alert( "File too small, please select a file greater than 2KB" );
+                    return false;
+                }
+            }
+        }
+    }
+
+
+    function fileValidateExtension(input){
+
+        var fileInput = input;
+        var filePath = fileInput.value;
+        // Allowing file type
+        var allowedExtensions = /(\.xml)$/i;
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            fileInput.value = '';
+            return false;
+        }
+    }
+
 </script>
 
 @endpush

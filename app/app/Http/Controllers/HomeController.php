@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Client;
-use App\RequestClient;
+use App\Escaparate;
+use App\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $clients  = Client::all();
-        return view('home',compact('clients'));
+        $showcases  = Escaparate::all();
+        return view('home',compact('showcases'));
     }
 }

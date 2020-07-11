@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RequestClient extends Model
+class Property extends Model
 {
-    protected $fillable = ['title','request','client_id','user_id'];
-    protected $table = 'request_client';
+    protected $fillable = ['title','data','client_id','user_id'];
+    protected $table = 'properties';
 
     public function client()
     {

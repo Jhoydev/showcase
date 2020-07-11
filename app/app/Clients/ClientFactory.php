@@ -1,7 +1,7 @@
 <?php
 namespace App\Clients;
 
-use App\RequestClient;
+use App\Property;
 use Illuminate\Support\Str;
 
 class ClientFactory
@@ -9,18 +9,13 @@ class ClientFactory
     public static function make($referer)
     {
         $inmovilla = ['apinmo','inmovilla'];
-        $test = ['utilidades'];
 
-        $class = null;
+        $class = "App\\Clients\\" . Str::studly($referer);
 
         if (Str::contains($referer,$inmovilla)){
             $class = "App\\Clients\\Inmovilla";
-            $request_client = RequestClient::where('id', request()->request_client_id)->first();
+            $request_client = Property::where('id', request()->request_client_id)->first();
             return new $class($request_client->request);
-        }
-
-        if (Str::contains($referer,$test)){
-            $class = "App\\Clients\\Inmovilla";
         }
 
         if (!class_exists($class)) {

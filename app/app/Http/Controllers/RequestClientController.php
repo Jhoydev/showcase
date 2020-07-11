@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\RequestClient;
+use App\Property;
 use Illuminate\Http\Request;
 
 class RequestClientController extends Controller
@@ -41,10 +41,10 @@ class RequestClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\RequestClient  $requestClient
+     * @param  \App\Property  $requestClient
      * @return \Illuminate\Http\Response
      */
-    public function show(RequestClient $requestClient)
+    public function show(Property $requestClient)
     {
         //
     }
@@ -52,10 +52,10 @@ class RequestClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RequestClient  $requestClient
+     * @param  \App\Property  $requestClient
      * @return \Illuminate\Http\Response
      */
-    public function edit(RequestClient $requestClient)
+    public function edit(Property $requestClient)
     {
         //
     }
@@ -64,10 +64,10 @@ class RequestClientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RequestClient  $requestClient
+     * @param  \App\Property  $requestClient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RequestClient $requestClient)
+    public function update(Request $request, Property $requestClient)
     {
         //
     }
@@ -75,10 +75,10 @@ class RequestClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RequestClient  $requestClient
+     * @param  \App\Property  $requestClient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RequestClient $requestClient)
+    public function destroy(Property $requestClient)
     {
         //
     }

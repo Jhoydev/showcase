@@ -3,23 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Clients\ClientFactory;
 use App\Escaparate;
 use App\Clients\Inmovilla;
-use App\RequestClient;
+use App\Property;
+use App\Uploaders\UploadFactory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EscaparateController extends Controller
 {
-    public function __construct()
-    {
 
-    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -28,71 +26,14 @@ class EscaparateController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function create(Client $client)
+    public function create()
     {
         $escaparates = Escaparate::all();
-        $request_client = $client->request_client()->where('user_id',Auth::user()->id)->get();
-        return view('escaparates.create',compact('client','request_client','escaparates'));
+        $request_client = Property::where('user_id', Auth::user()->id)->get();
+        return view('escaparates.create', compact('request_client', 'escaparates'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
 
 
     public function previous(Request $request)
@@ -100,12 +41,26 @@ class EscaparateController extends Controller
 
         $escaparate = Escaparate::Where('id', $request->escaparate_id)->first();
         $view = $escaparate->view();
-        $referer = $request->headers->get('referer');
+
         if ($request->request_client_id) {
-            $request_client = RequestClient::where('id',$request->request_client_id)->first();
-            $referer = 'inmovilla';
+            $request_client = Property::where('id', $request->request_client_id)->first();
+            $referer = $request_client->client->name;
+            $data  = $escaparate->make($referer);
+            return view($view, compact('data'));
         }
-        $data  = $escaparate->make($referer);
-        return view($view, compact('data'));
+        return abort(404);
+    }
+
+    public function uploadXML(Request $request)
+    {
+        $client = Client::where('id', $request->client_id)->first();
+        $uploader = UploadFactory::make($client);
+        $uploader->uploadXML($request->file('file'));
+
+
+        $data = $uploader->storeJson($client, Auth::user());
+
+        return response()->json($data);
+
     }
 }

@@ -1,12 +1,42 @@
 <?php
 namespace App\Clients;
 
-use App\RequestClient;
+use App\Property;
 
 class Inmovilla extends Skeleton
 {
 
-    protected $data;
+    protected $fillable = [
+        'cod_ofer',
+        'ref',
+        'tipomensual',
+        'precio',
+        'estadoficha',
+        'precioalq',
+        'nbtipo',
+        'ciudad',
+        'zona',
+        'banyos',
+        'habitaciones',
+        'aseos',
+        'planta',
+        'm_parcela',
+        'm_uties',
+        'm_cons',
+        'nbconservacion',
+        'numagencia',
+        'plaza_gara',
+        'calle',
+        'ascensor',
+        'calefaccion',
+        'electro',
+        'arma_empo',
+        'puerta_blin',
+        'linea_tlf',
+        'gastos_com',
+        'acciones',
+        'telefono_agente'
+    ];
 
     public function __construct($data) {
 
@@ -16,11 +46,11 @@ class Inmovilla extends Skeleton
         }
         $data = (object) $data;
 
-        $this->data = $data;
+        $data = $this->setDefaultValues($data);
 
         $this->property_id = $data->cod_ofer;
         $this->ref = $data->ref;
-        $this->type_moth_rent = $data->tipomensual;
+        $this->type_month_rent = $data->tipomensual;
         $this->price = $data->precio;
         $this->status = $data->estadoficha;
         $this->price_rent = $data->precioalq;
@@ -35,7 +65,6 @@ class Inmovilla extends Skeleton
         $this->m_area = $data->m_uties;
         $this->m_const = $data->m_cons;
         $this->category_built = $data->nbconservacion;
-
         $this->id_agency = $data->numagencia;
         $this->parking = $data->plaza_gara;
         $this->address = $data->calle;
@@ -47,15 +76,16 @@ class Inmovilla extends Skeleton
         $this->phone_line = $data->linea_tlf;
         $this->cost_community = $data->gastos_com;
         $this->operation = $data->acciones;
-
         $this->agent_phone = $data->telefono_agente;
-        $this->fotos = $this->fotos();
+
+        $this->fotos = $this->fotos($data);
         $this->normalizer();
     }
 
-    private function fotos(){
+    private function fotos($data)
+    {
         $fotos = [];
-        foreach ($this->data as $key => $value){
+        foreach ($data as $key => $value){
             if (preg_match('/^foto[0-9]+/',$key)){
                 $fotos[] = $value;
             }
@@ -63,9 +93,5 @@ class Inmovilla extends Skeleton
         return $fotos;
     }
 
-    private function fakeData(){
-        return '{
 
-        }';
-    }
 }
