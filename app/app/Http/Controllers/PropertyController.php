@@ -13,7 +13,7 @@ class PropertyController extends Controller
     public function index()
     {
         $clients = Client::all();
-        $properties = Property::all();
+        $properties = Property::where('user_id',Auth::user()->id)->get();
         return view('properties.index',compact('clients','properties'));
     }
 

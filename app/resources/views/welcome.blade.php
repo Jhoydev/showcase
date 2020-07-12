@@ -142,7 +142,7 @@
                     <h1>Jhoseph.Dev</h1>
                 </div>
                 <div class="links fadeIn wait-2s">
-                    <a href="{{ url('escaparates') }}">
+                    <a href="{{ url('home') }}">
                         <i class="fa fa-picture-o" aria-hidden="true"></i>
                         Escaparates
                     </a>

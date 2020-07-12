@@ -23,8 +23,8 @@ class InmovillaController extends Controller
 
         if (Str::contains($host, explode(';', $inmovilla->domain)) && $user->id){
 
-            if ($user->request_client->count() >= 10) {
-                return abort(401);
+            if ($user->request_client->count() >= 100) {
+                return abort(401, 'Limite');
             }
 
             $uploader = new Inmovilla($inmovilla);

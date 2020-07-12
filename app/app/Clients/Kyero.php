@@ -49,6 +49,13 @@ class Kyero extends ClientContract
         }
 
         foreach($this->data->property as $property){
+            $count_properties = Property::where('user_id',$user->id)->count();
+
+            if ($count_properties >= $user->properties_limit) {
+                \Session::flash('warning','Has superado tu limite de propiedades');
+                return false;
+            }
+
             $this->mapOut($property, $user);
             $json = json_encode($this->property);
             Property::create([

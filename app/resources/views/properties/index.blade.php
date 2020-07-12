@@ -5,6 +5,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-lg-4 col-md-6 mb-3">
                 <h3>Propiedades</h3>
+                <p>Limite {{ count($properties) }}/{{ Auth::user()->properties_limit }}</p>
                 <ul class="list-group">
                     @foreach($properties as $property)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -31,13 +32,15 @@
                                 </div>
                                 @if ($client->format == 'post')
                                     <div class="form-group">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at corporis deserunt dicta, dignissimos et ex illo itaque mollitia non numquam porro provident quam sit temporibus. Alias commodi cumque mollitia?</p>
+                                        <div class="alert alert-info" role="alert">
+                                            <small>{{ config('app.url') }}/{{ $client->name }}/escaparate/upload/{{ Auth::user()->api_key }}</small>
+                                        </div>
                                     </div>
                                 @elseif ($client->format == 'xml')
                                     <form action="{{ url('upload/file/xml') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="file" name="file" id="file" onchange="fileValidation(this)">
+                                            <input type="file" name="file" id="file" onchange="fileValidation(this)" required>
                                             <input type="hidden" name="client_id" value="{{ $client->id }}">
                                         </div>
                                         <div class="form-group">

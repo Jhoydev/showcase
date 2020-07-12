@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="text-center">
+                <img class="img-fluid" src="{{ asset('images/icons/forgot_password.svg') }}" alt="" style="height: 200px;">
+            </div>
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 

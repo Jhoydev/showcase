@@ -23,8 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('logo')->nullable();
             $table->string('address')->nullable();
             $table->string('cp')->nullable();
-            $table->uuid('api_key');
+            $table->uuid('api_key')->default(\Illuminate\Support\Str::uuid());
             $table->string('email')->unique();
+            $table->integer('properties_limit')->default(5);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

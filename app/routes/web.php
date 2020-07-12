@@ -4,11 +4,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::resource('escaparates',  'EscaparateController');
-Route::get('escaparates',  'EscaparateController@index');
 Route::post('escaparates/previous','EscaparateController@previous')->name('showcase.previous')->middleware('auth');
-Route::get('/escaparates/create',  'EscaparateController@create')->middleware('auth');
+Route::get('/escaparates/create',  'EscaparateController@create')->middleware('auth','verified');
 Route::resource('profile', 'UserController')->middleware('auth');
 Route::put('genera-new-apikey', 'UserController@generateNewApiKey')->name('profile.generateNewApiKey')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
