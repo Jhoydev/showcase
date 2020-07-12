@@ -13,5 +13,7 @@ Route::resource('profile', 'UserController')->middleware('auth');
 Route::put('genera-new-apikey', 'UserController@generateNewApiKey')->name('profile.generateNewApiKey')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/upload/images/{any}','ImageController@show')->where('any','.*');
-Route::post('upload/file/xml', 'EscaparateController@uploadXML');
+
+// Properties
 Route::get('properties','PropertyController@index');
+Route::post('upload/file/xml', 'PropertyController@uploadXML');

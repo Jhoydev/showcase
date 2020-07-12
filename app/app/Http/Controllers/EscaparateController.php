@@ -43,9 +43,8 @@ class EscaparateController extends Controller
         $view = $escaparate->view();
 
         if ($request->request_client_id) {
-            $request_client = Property::where('id', $request->request_client_id)->first();
-            $referer = $request_client->client->name;
-            $data  = $escaparate->make($referer);
+            $property = Property::where('id', $request->request_client_id)->first();
+            $data  = json_decode($property->data);
             return view($view, compact('data'));
         }
         return abort(404);
@@ -56,8 +55,6 @@ class EscaparateController extends Controller
         $client = Client::where('id', $request->client_id)->first();
         $uploader = UploadFactory::make($client);
         $uploader->uploadXML($request->file('file'));
-
-
         $data = $uploader->storeJson($client, Auth::user());
 
         return response()->json($data);

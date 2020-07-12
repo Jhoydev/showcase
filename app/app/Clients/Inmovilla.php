@@ -1,10 +1,13 @@
 <?php
 namespace App\Clients;
 
+use App\Client;
 use App\Property;
+use App\User;
 
-class Inmovilla extends Skeleton
+class Inmovilla extends ClientContract
 {
+    use Skeleton;
 
     protected $fillable = [
         'cod_ofer',
@@ -35,54 +38,70 @@ class Inmovilla extends Skeleton
         'linea_tlf',
         'gastos_com',
         'acciones',
-        'telefono_agente'
+        'telefono_agente',
+        'fotos'
     ];
+    protected $data;
 
-    public function __construct($data) {
-
-
-        if (is_string($data)) {
-            $data = json_decode($data);
-        }
-        $data = (object) $data;
-
-        $data = $this->setDefaultValues($data);
-
-        $this->property_id = $data->cod_ofer;
-        $this->ref = $data->ref;
-        $this->type_month_rent = $data->tipomensual;
-        $this->price = $data->precio;
-        $this->status = $data->estadoficha;
-        $this->price_rent = $data->precioalq;
-        $this->property_type = $data->nbtipo;
-        $this->city = $data->ciudad;
-        $this->zone = $data->zona;
-        $this->bathroom = $data->banyos;
-        $this->bedroom = $data->habitaciones;
-        $this->restroom = $data->aseos;
-        $this->floor = $data->planta;
-        $this->m_plot = $data->m_parcela;
-        $this->m_area = $data->m_uties;
-        $this->m_const = $data->m_cons;
-        $this->category_built = $data->nbconservacion;
-        $this->id_agency = $data->numagencia;
-        $this->parking = $data->plaza_gara;
-        $this->address = $data->calle;
-        $this->lift = $data->ascensor;
-        $this->heating = $data->calefaccion;
-        $this->appliances = $data->electro;
-        $this->wardrove = $data->arma_empo;
-        $this->reinforced_door = $data->puerta_blin;
-        $this->phone_line = $data->linea_tlf;
-        $this->cost_community = $data->gastos_com;
-        $this->operation = $data->acciones;
-        $this->agent_phone = $data->telefono_agente;
-
-        $this->fotos = $this->fotos($data);
-        $this->normalizer();
+    public function getRequest($request)
+    {
+        $this->data = $request;
     }
 
-    private function fotos($data)
+    public function storeJson(Client $client, User $user)
+    {
+        if (!count($this->data)) {
+            return false;
+        }
+
+        $this->mapOut($this->data, $user);
+        Property::create([
+            'data' => json_encode($this->property),
+            'title' => $this->property->ref,
+            'user_id' => $user->id
+        ]);
+    }
+
+    protected function mapOut($data, User $user)
+    {
+        $data = $this->setDefaultValues($data);
+        $this->cleanProperty();
+
+        $this->property->property_id = $data->cod_ofer;
+        $this->property->ref = $data->ref;
+        $this->property->type_month_rent = $data->tipomensual;
+        $this->property->price = $data->precio;
+        $this->property->status = $data->estadoficha;
+        $this->property->price_rent = $data->precioalq;
+        $this->property->property_type = $data->nbtipo;
+        $this->property->city = $data->ciudad;
+        $this->property->zone = $data->zona;
+        $this->property->bathroom = $data->banyos;
+        $this->property->bedroom = $data->habitaciones;
+        $this->property->restroom = $data->aseos;
+        $this->property->floor = $data->planta;
+        $this->property->m_plot = $data->m_parcela;
+        $this->property->m_area = $data->m_uties;
+        $this->property->m_const = $data->m_cons;
+        $this->property->category_built = $data->nbconservacion;
+        $this->property->id_agency = $data->numagencia;
+        $this->property->parking = $data->plaza_gara;
+        $this->property->address = $data->calle;
+        $this->property->lift = $data->ascensor;
+        $this->property->heating = $data->calefaccion;
+        $this->property->appliances = $data->electro;
+        $this->property->wardrove = $data->arma_empo;
+        $this->property->reinforced_door = $data->puerta_blin;
+        $this->property->phone_line = $data->linea_tlf;
+        $this->property->cost_community = $data->gastos_com;
+        $this->property->operation = $data->acciones;
+        $this->property->agent_phone = $data->telefono_agente;
+        $this->property->fotos = $this->fotos($data);
+        $this->normalizer($user);
+    }
+
+
+    protected function fotos($data)
     {
         $fotos = [];
         foreach ($data as $key => $value){

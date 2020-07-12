@@ -1,22 +1,15 @@
 <?php
 namespace App\Clients;
 
+use App\Client;
 use App\Property;
 use Illuminate\Support\Str;
 
 class ClientFactory
 {
-    public static function make($referer)
+    public static function make(Client $client)
     {
-        $inmovilla = ['apinmo','inmovilla'];
-
-        $class = "App\\Clients\\" . Str::studly($referer);
-
-        if (Str::contains($referer,$inmovilla)){
-            $class = "App\\Clients\\Inmovilla";
-            $request_client = Property::where('id', request()->request_client_id)->first();
-            return new $class($request_client->request);
-        }
+        $class = "App\\Clients\\" . Str::studly($client->name);
 
         if (!class_exists($class)) {
             throw new \Exception('Client not found');

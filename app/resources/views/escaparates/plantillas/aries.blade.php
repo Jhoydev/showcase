@@ -309,10 +309,9 @@
 <div class="contenedor-escaparate">
     <header>
         <div id="cnt_logo">
-        <img src="{{ $data->logo }}" alt="">
+            <img src="{{ $data->logo }}" alt="">
         </div>
         <div id="ctn_title">
-
             {{ $data->property_type }} EN {{ $data->operation }}
         </div>
         <div id="cnt_main_label">

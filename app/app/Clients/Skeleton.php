@@ -1,62 +1,28 @@
 <?php
 namespace App\Clients;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
-class Skeleton
+/**
+ * Trait Skeleton
+ * @package App\Clients
+ */
+trait Skeleton
 {
-    public $property_id;
-    public $ref;
-    public $type_month_rent;
-    public $price;
-    public $status;
-    public $price_rent;
-    public $property_type;
-    public $city;
-    public $zone;
-    public $address;
-    public $bathroom;
-    public $bedroom;
-    public $restroom;
-    public $floor;
-    public $m_plot;
-    public $m_area;
-    public $m_const;
-    public $id_agency;
-    public $fotos;
-    public $parking;
-    public $agent_phone;
-    public $lift;
-    public $heating;
-    public $appliances;
-    public $wardrove;
-    public $reinforced_door;
-    public $phone_line;
-    public $cost_community;
-    public $category_built;
-    public $operation;
-    public $web;
-    public $address_agency;
-    public $logo;
+    public $property;
 
-
-
-    protected function normalizer()
-    {
-        $this->city = $this->city ?: '';
-        $this->address = $this->address ?: 'Sin Calle';
-        $this->price = number_format($this->price,0,',','.') ?: 'A consultar';
-        $this->operation = ($this->operation == 'Vender') ? 'Venta' : $this->operation;
-        if (Auth::user()) {
-            $this->web = $this->web ?: Auth::user()->web;
-            $this->logo = $this->logo ?: url('upload/images/' . Auth::user()->logo);
-            $this->agent_phone = $this->agent_phone ?: Auth::user()->phone;
-            $this->address_agency = $this->address_agency ?: Auth::user()->address;
-        }
+    public function __construct() {
+        $this->cleanProperty();
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     */
     protected function setDefaultValues($data)
     {
+        $data = (object) $data;
         foreach ($this->fillable as $field) {
             if (!isset($data->$field)) {
                 $data->{$field} = '';
@@ -64,5 +30,68 @@ class Skeleton
             }
         }
         return $data;
+    }
+
+    protected function cleanProperty()
+    {
+        $this->property = [
+            'property_id' => null,
+            'ref' => null,
+            'type_month_rent' => null,
+            'price' => null,
+            'status' => null,
+            'price_rent' => null,
+            'property_type' => null,
+            'city' => null,
+            'zone' => null,
+            'address' => null,
+            'bathroom' => null,
+            'bedroom' => null,
+            'restroom' => null,
+            'floor' => null,
+            'm_plot' => null,
+            'm_area' => null,
+            'm_const' => null,
+            'id_agency' => null,
+            'fotos' => null,
+            'parking' => null,
+            'agent_phone' => null,
+            'lift' => null,
+            'heating' => null,
+            'appliances' => null,
+            'wardrove' => null,
+            'reinforced_door' => null,
+            'phone_line' => null,
+            'cost_community' => null,
+            'category_built' => null,
+            'operation' => null,
+            'web' => null,
+            'address_agency' => null,
+            'logo' => null
+        ];
+        $this->property = (object) $this->property;
+    }
+
+    public function get()
+    {
+        $data = [];
+        foreach ($this->fillable as $key){
+            $data[$key] = $this->{$key};
+        }
+        return $data;
+    }
+
+    protected function normalizer(User $user)
+    {
+        $this->property->city = $this->property->city ?: '';
+        $this->property->address = $this->property->address ?: 'Sin Calle';
+        $this->property->price = number_format($this->property->price,0,',','.') ?: 'A consultar';
+        $this->property->operation = (in_array(strtolower($this->property->operation),['vender','sale'])) ? 'Venta' : $this->property->operation;
+        if ($user) {
+            $this->property->web = $this->property->web ?: $user->web;
+            $this->property->logo = $this->property->logo ?: url('upload/images/' . $user->logo);
+            $this->property->agent_phone = $this->property->agent_phone ?: $user->phone;
+            $this->property->address_agency = $this->property->address_agency ?: $user->address;
+        }
     }
 }

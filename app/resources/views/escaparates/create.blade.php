@@ -1,23 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid create_escaparate">
+<div class="container create_escaparate">
     <div class="row mb-4 d-flex justify-content-center">
-        <div class="col-12 d-flex">
-            @foreach ($request_client as $item)
-                <div class="card mr-3 request_client_card text-second pointer" data-request_client_id="{{ $item->id}}">
-                    <div class="card-body py-2 px-4">Referencia: {{ $item->title}}</div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-    <div class="row">
         <div class="col-12 mb-3">
-            <h3>Elige una plantilla</h3>
+            <h3 class="text-center">Elige una propiedad</h3>
+            <hr class="border border-primary">
+        </div>
+        @foreach ($request_client as $item)
+        <div class="d-flex mb-3">
+            <div class="card mr-3 request_client_card text-second pointer" data-request_client_id="{{ $item->id}}">
+                <div class="card-body py-2 px-4"><span class="text-muted">Referencia:</span> {{ $item->title}}</div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h3 class="text-center">Elige una plantilla</h3>
+            <hr class="border border-primary">
         </div>
         @foreach ($escaparates as $escaparate)
         <div class="col-md-3">
-            <h5 class="text-capitalize">{{$escaparate->name }}</h5>
+            <h5 class="text-capitalize text-center">{{$escaparate->name }}</h5>
             <img class="img-thumbnail mb-5 pointer img-escaparate" src="{{ $escaparate->thumbnail }}"
                 alt="{{ $escaparate->name }}" data-escaparate_id="{{ $escaparate->id}}">
         </div>

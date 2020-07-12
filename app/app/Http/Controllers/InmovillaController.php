@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Clients\Inmovilla;
 use App\User;
 use App\Client;
-use App\Property;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class InmovillaController extends Controller
 {
@@ -27,7 +27,10 @@ class InmovillaController extends Controller
                 return abort(401);
             }
 
-            $user->createRequestClient($inmovilla, $request);
+            $uploader = new Inmovilla($inmovilla);
+            $uploader->getRequest($request->all());
+
+            $uploader->storeJson($inmovilla, $user);
 
             return redirect('/home');
         }
